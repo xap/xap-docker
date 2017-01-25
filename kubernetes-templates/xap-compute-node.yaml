@@ -1,0 +1,38 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: xap-node
+  labels:
+    app: xap-node
+    version: 12.0.1
+spec:
+  replicas: <num>
+  selector:
+    matchLabels:
+      app: xap-node
+      version: 12.0.1
+  template:
+    metadata:
+      labels:
+        app: xap-node
+        version: 12.0.1
+    spec:
+      containers:
+      - args:
+        - gsa.global.lus 0 gsa.lus 0 gsa.global.gsm 0 gsa.gsm 0 gsa.gsc 1
+        env:
+        - name: XAP_LOOKUP_LOCATORS
+          value: xap-mgt-node:4174
+        image: <image>
+        imagePullPolicy: IfNotPresent
+        name: xap-node
+        resources: {}
+        securityContext:
+          privileged: false
+        terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: <imagePullSecret>
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30

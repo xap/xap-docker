@@ -14,7 +14,7 @@ RUN unzip /tmp/gigaspaces-xap-premium-${XAP_VERSION}-${XAP_MILESTONE}-b${XAP_BUI
     && rm -f /tmp/gigaspaces-xap-premium-*.zip
 
 ENV XAP_HOME ${XAP_HOME_DIR}/gigaspaces-xap-premium-${XAP_VERSION}-${XAP_MILESTONE}-b${XAP_BUILD_NUMBER}
-ENV XAP_NIC_ADDRESS "#local:ip#"
+ENV XAP_NIC_ADDRESS "#eth0:ip#"
 ENV EXT_JAVA_OPTIONS "-Dcom.gs.multicast.enabled=false -Dcom.gs.multicast.discoveryPort=4174 -Dcom.gs.transport_protocol.lrmi.bind-port=10000-10100 -Dcom.gigaspaces.start.httpPort=9104 -Dcom.gigaspaces.system.registryPort=7102"
 ENV XAP_GSM_OPTIONS "-Xms128m -Xmx128m"
 ENV XAP_GSC_OPTIONS "-Xms128m -Xmx128m"
