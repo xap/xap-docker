@@ -9,7 +9,7 @@ IMAGE_PULL_SECRET=xap12-registry-key
 XAP_GSC_COUNT=4
 
 create-image-pull-secret:
-	kubectl create secret docker-registry $(IMAGE_PULL_SECRET) --docker-server=$(DOCKER_REGISTRY_SERVER) --docker-username=$(DOCKER_USER) --docker-password=$(DOCKER_PASSWORD) --docker-email=$(DOCKER_EMAIL)
+	-kubectl create secret docker-registry $(IMAGE_PULL_SECRET) --docker-server=$(DOCKER_REGISTRY_SERVER) --docker-username=$(DOCKER_USER) --docker-password=$(DOCKER_PASSWORD) --docker-email=$(DOCKER_EMAIL)
 
 create-xap-datagrid:
 	@echo 'Creating XAP GSM/LUS Service'
