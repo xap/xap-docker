@@ -5,13 +5,10 @@
     "vmName": {
       "type": "string"
     },
-    "publicIPAddress": {
+    "publicIP": {
       "type": "string"
     },
-    "vmNicName": {
-      "type": "string"
-    },
-    "dependencyRef": {
+    "privateIP": {
       "type": "string"
     },
     "xapLookupLocators": {
@@ -28,9 +25,7 @@
       "name": "[concat(parameters('vmName'), '/', 'XapMgtNodeExtension')]",
       "apiVersion": "2015-06-15",
       "location": "[resourceGroup().location]",
-      "dependsOn": [
-        "[parameters('dependencyRef')]"
-      ],
+      "dependsOn": [],
       "properties": {
         "publisher": "Microsoft.Azure.Extensions",
         "type": "CustomScript",
@@ -40,7 +35,7 @@
            "fileUris": [
             "https://api.github.com/repos/xap/xap-docker/zipball"
            ],
-           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; echo ', variables('xapLicenseParam'), ' > xap-license.txt; docker build -t gigaspaces/xap:12.0.1 .; docker run --name ', parameters('vmName'),' -d --net=host -e XAP_LOOKUP_LOCATORS=', concat(reference(concat('Microsoft.Network/networkInterfaces/', parameters('vmNicName'))).ipConfigurations[0].properties.privateIPAddress, ':4174'), ' gigaspaces/xap:12.0.1 gsa.global.lus 0 gsa.lus 1 gsa.global.gsm 0 gsa.gsm 1 gsa.gsc 0\"')]"
+           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; echo ', parameters('xapLicense'), ' > xap-license.txt; docker build -t gigaspaces/xap:12.0.1 .; docker run --name ', parameters('vmName'),' -d --net=host -e XAP_LOOKUP_LOCATORS=', concat(parameters('privateIP'), ':4174'), ' gigaspaces/xap:12.0.1 gsa.global.lus 0 gsa.lus 1 gsa.global.gsm 0 gsa.gsm 1 gsa.gsc 0\"')]"
         }
       }
     }
@@ -48,7 +43,7 @@
   "outputs": {
     "lookupLocator": {
       "type": "string",
-      "value": "[concat(reference(concat('Microsoft.Network/networkInterfaces/', parameters('vmNicName'))).ipConfigurations[0].properties.privateIPAddress, ':4174')]"
+      "value": "[concat(parameters('privateIP'), ':4174')]"
     }
   }
 }
