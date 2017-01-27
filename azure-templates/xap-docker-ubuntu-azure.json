@@ -89,7 +89,7 @@
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
     "startScriptName": "[concat('start-', parameters('xapNodeType'), '-node.sh')]",
     "xapLicenseParam": "[concat(variables('singleQuote'), parameters('xapLicense'), variables('singleQuote'))]",
-    "xapExtensionName": "[concat(parameters('xapNodeType'), 'Extension')]"
+    "xapExtensionName": "[concat(parameters('vmName'), '/', 'XapExtension')]"
   },
   "resources": [
     {
@@ -255,7 +255,7 @@
   "outputs": {
     "result": {
       "type": "string",
-      "value": "[variables('xapExtensionName').outputs.result]"
+      "value": "[reference(variables('xapExtensionName')).outputs.result.value]"
     }
   }
 }
