@@ -1,0 +1,48 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmName": {
+      "type": "string"
+    },
+    "publicIPAddress": {
+      "type": "string"
+    },
+    "vmNicName": {
+      "type": "string"
+    },
+    "dependencyRef": {
+      "type": "string"
+    },
+    "xapLookupLocators": {
+      "type": "string"
+    },
+    "xapLicense": {
+      "type": "securestring"
+    }
+  },
+  "variables": {},
+  "resources": [
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(parameters('vmName'), '/', 'XapComputeNodeExtension')]",
+      "apiVersion": "2015-06-15",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[parameters('dependencyRef')]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Azure.Extensions",
+        "type": "CustomScript",
+        "typeHandlerVersion": "2.0",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+           "fileUris": [
+            "https://api.github.com/repos/xap/xap-docker/zipball"
+           ],
+           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; echo ', variables('xapLicenseParam'), ' > xap-license.txt; docker build -t gigaspaces/xap:12.0.1 .; docker run --name ', parameters('vmName'),' -d --net=host -e XAP_LOOKUP_LOCATORS=', parameters('xapLookupLocators'), ' gigaspaces/xap:12.0.1 gsa.global.lus 0 gsa.lus 0 gsa.global.gsm 0 gsa.gsm 0 gsa.gsc 1\"')]"
+        }
+      }
+    }
+  ]
+}
