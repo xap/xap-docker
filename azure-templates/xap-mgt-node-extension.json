@@ -41,7 +41,7 @@
     }
   ],
   "outputs": {
-    "lookupLocator": {
+    "result": {
       "type": "string",
       "value": "[concat(parameters('privateIP'), ':4174')]"
     }

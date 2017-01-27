@@ -41,7 +41,7 @@
     }
   ],
   "outputs": {
-    "gsWebuiUrl": {
+    "result": {
       "type": "string",
       "value": "[concat('http://', parameters('publicIP'), ':8099')]"
     }

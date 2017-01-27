@@ -39,5 +39,11 @@
         }
       }
     }
-  ]
+  ],
+  "outputs": {
+    "result": {
+      "type": "string",
+      "value": "[parameters('privateIP')]"
+    }
+  }
 }
