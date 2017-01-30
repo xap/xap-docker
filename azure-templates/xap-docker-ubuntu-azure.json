@@ -89,7 +89,7 @@
     "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
     "startScriptName": "[concat('start-', parameters('xapNodeType'), '-node.sh')]",
     "xapLicenseParam": "[concat(variables('singleQuote'), parameters('xapLicense'), variables('singleQuote'))]",
-    "xapExtensionName": "[concat(parameters('vmName'), '/', 'XapExtension')]"
+    "xapExtensionName": "[concat(parameters('vmName'), '-', 'XapExtension')]"
   },
   "resources": [
     {
