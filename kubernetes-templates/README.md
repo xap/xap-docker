@@ -1,15 +1,17 @@
 ## kubernetes-templates
 
-This directory contains exemplary templates of how to run XAP data grid with [Kubernetes](https://github.com/kubernetes/kubernetes/blob/master/docs).
+This directory contains exemplary templates of how to run XAP data grid with existing [Kubernetes cluster](https://github.com/kubernetes/kubernetes/blob/master/docs).
 
 ### Pre-requirements
 
 1. [Docker registry](https://docs.docker.com/registry/deploying/), that stores XAP docker image
 
-2. Linux box with installed 
+2. Kubernetes cluster that might be running locally, on-premises VMs or on a cloud provider
+
+3. Linux box with installed 
 
     - Make Utility
-    - [kubectl] (https://kubernetes.io/docs/user-guide/prereqs/) should be connected to the kubernetes cluster
+    - [kubectl](https://kubernetes.io/docs/user-guide/prereqs/) should be connected to the kubernetes cluster
 
 ### Usage
 

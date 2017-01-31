@@ -85,5 +85,8 @@
   },
   "xapGscCount": {
     "value": 2
+  },
+  "xapLicenseKey": {
+    "value": "XAP license key"
   }
 }

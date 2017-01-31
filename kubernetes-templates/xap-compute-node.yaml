@@ -23,6 +23,11 @@ spec:
         env:
         - name: XAP_LOOKUP_LOCATORS
           value: xap-mgt-node:4174
+        - name: XAP_LICENSE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: xap-license-secret
+              key: xap-license
         image: <image>
         imagePullPolicy: IfNotPresent
         name: xap-node

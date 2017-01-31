@@ -627,6 +627,12 @@
             "description": "The count of Pods that run XAP GSC."
           },
           "type": "int"
+        },
+        "xapLicenseKey": {
+          "metadata": {
+            "description": "XAP license key."
+          },
+          "type": "securestring"
         }
     },
     "variables": {
@@ -1475,7 +1481,7 @@
                "fileUris": [
                 "https://api.github.com/repos/xap/xap-docker/zipball"
                ],
-               "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip make; unzip -jo zipball; make DOCKER_REGISTRY_SERVER=', parameters('dockerRegistryServer'), ' DOCKER_USER=', parameters('dockerRegistryUser'), ' DOCKER_PASSWORD=', parameters('dockerRegistryPassword'), ' DOCKER_EMAIL=', parameters('dockerRegistryEmail'), ' create-image-pull-secret; make DOCKER_IMAGE=', parameters('dockerImage'), ' XAP_GSC_COUNT=', parameters('xapGscCount'), ' create-xap-datagrid\"')]"
+               "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip make; unzip -jo zipball; make DOCKER_REGISTRY_SERVER=', parameters('dockerRegistryServer'), ' DOCKER_USER=', parameters('dockerRegistryUser'), ' DOCKER_PASSWORD=', parameters('dockerRegistryPassword'), ' DOCKER_EMAIL=', parameters('dockerRegistryEmail'), ' create-image-pull-secret; make DOCKER_IMAGE=', parameters('dockerImage'), ' XAP_GSC_COUNT=', parameters('xapGscCount'), ' XAP_LICENSE_KEY=', parameters('xapLicenseKey'), ' create-xap-datagrid\"')]"
             }
           },
           "type": "Microsoft.Compute/virtualMachines/extensions"

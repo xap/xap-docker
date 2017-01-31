@@ -4,7 +4,6 @@ ENV XAP_VERSION 12.0.1
 ENV XAP_BUILD_NUMBER 16600
 ENV XAP_MILESTONE ga
 ENV XAP_HOME_DIR /opt/xap
-ENV XAP_LICENSE xap-license.txt
 
 RUN mkdir -p ${XAP_HOME_DIR}
 
@@ -27,7 +26,6 @@ COPY docker-entrypoint.sh /docker-entrypoint.sh
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 WORKDIR ${XAP_HOME}
-COPY ${XAP_LICENSE} .
 
 EXPOSE 10000-10100 9104 7102 4174 8099
 

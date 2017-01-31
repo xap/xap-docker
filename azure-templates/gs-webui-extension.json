@@ -35,7 +35,7 @@
            "fileUris": [
             "https://api.github.com/repos/xap/xap-docker/zipball"
            ],
-           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; echo ', parameters('xapLicense'), ' > xap-license.txt; docker build -t gigaspaces/xap:12.0.1 .; docker run --name ', parameters('vmName'),' -d --net=host -e XAP_LOOKUP_LOCATORS=', parameters('xapLookupLocators'), ' gigaspaces/xap:12.0.1 ./bin/gs-webui.sh\"')]"
+           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; docker build -t gigaspaces/xap:12.0.1 .; docker run --name ', parameters('vmName'),' -d --net=host -e XAP_LICENSE_KEY=', parameters('xapLicense'), ' -e XAP_LOOKUP_LOCATORS=', parameters('xapLookupLocators'), ' gigaspaces/xap:12.0.1 ./bin/gs-webui.sh\"')]"
         }
       }
     }
