@@ -11,9 +11,9 @@ XAP_GSC_COUNT=4
 
 create-image-pull-secret:
 	-kubectl create secret docker-registry $(IMAGE_PULL_SECRET) --docker-server=$(DOCKER_REGISTRY_SERVER) --docker-username=$(DOCKER_USER) --docker-password=$(DOCKER_PASSWORD) --docker-email=$(DOCKER_EMAIL)
-
 create-xap-datagrid:
-	-kubectl create secret generic xap-license-secret --from-literal=xap-license=$(XAP_LICENSE_KEY)
+	@echo -n "$(XAP_LICENSE_KEY)" > xap-license
+	-kubectl create secret generic xap-license-secret --from-file=./xap-license
 	@echo 'Creating XAP GSM/LUS Service'
 	kubectl create -f xap-mgt-node-svc.yaml
 	@echo 'Creating XAP GSM/LUS Deployment'

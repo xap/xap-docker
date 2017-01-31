@@ -254,29 +254,11 @@
                 "description": "If true: uses DNS name prefix + Orchestrator name + Region to create storage account name to reduce name collision probability. If false: uses DNS name prefix + Orchestrator name to create storage account name to maintain template idempotency."
             }
         },
-        "enableVMDiagnostics": {
-            "defaultValue": true,
-            "type": "Bool",
-            "metadata": {
-                "description": "Allows user to enable/disable boot & vm diagnostics."
-            }
-        },
         "firstConsecutiveStaticIP": {
             "defaultValue": "10.240.255.5",
             "type": "String",
             "metadata": {
                 "description": "Sets the static IP of the first master"
-            }
-        },
-        "isValidation": {
-            "defaultValue": 0,
-            "allowedValues": [
-                0,
-                1
-            ],
-            "type": "Int",
-            "metadata": {
-                "description": "This is testing in the validation region"
             }
         },
         "kubeConfigCertificate": {
@@ -436,24 +418,6 @@
                 "description": "A string hash of the master DNS name to uniquely identify the cluster."
             }
         },
-        "oauthEnabled": {
-            "defaultValue": "false",
-            "allowedValues": [
-                "true",
-                "false"
-            ],
-            "type": "String",
-            "metadata": {
-                "description": "Enable OAuth authentication"
-            }
-        },
-        "postInstallScriptURI": {
-            "defaultValue": "disabled",
-            "type": "String",
-            "metadata": {
-                "description": "After installation, this specifies a script to download and install.  To disabled, set value to 'disabled'."
-            }
-        },
         "servicePrincipalClientId": {
             "type": "SecureString",
             "metadata": {
@@ -464,17 +428,6 @@
             "type": "SecureString",
             "metadata": {
                 "description": "The Service Principal Client Secret."
-            }
-        },
-        "setLinuxConfigurationForVMCreate": {
-            "defaultValue": 1,
-            "allowedValues": [
-                0,
-                1
-            ],
-            "type": "Int",
-            "metadata": {
-                "description": "This setting controls whether Linux configuration with SSH Key is passed in VM PUT Payload.  Defaults to 1.  If SSH Key is blank, this must be set to 0."
             }
         },
         "sshRSAPublicKey": {
@@ -1009,7 +962,9 @@
         "vmsPerStorageAccount": 20,
         "vnetCidr": "10.0.0.0/8",
         "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
-        "vnetSubnetID": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]"
+        "vnetSubnetID": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
+        "singleQuote": "'",
+        "xapLicenseKeyParam": "[concat(variables('singleQuote'), parameters('xapLicenseKey'), variables('singleQuote'))]"
     },
     "resources": [
         {
@@ -1481,7 +1436,7 @@
                "fileUris": [
                 "https://api.github.com/repos/xap/xap-docker/zipball"
                ],
-               "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip make; unzip -jo zipball; make DOCKER_REGISTRY_SERVER=', parameters('dockerRegistryServer'), ' DOCKER_USER=', parameters('dockerRegistryUser'), ' DOCKER_PASSWORD=', parameters('dockerRegistryPassword'), ' DOCKER_EMAIL=', parameters('dockerRegistryEmail'), ' create-image-pull-secret; make DOCKER_IMAGE=', parameters('dockerImage'), ' XAP_GSC_COUNT=', parameters('xapGscCount'), ' XAP_LICENSE_KEY=', parameters('xapLicenseKey'), ' create-xap-datagrid\"')]"
+               "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip make; unzip -jo zipball; make DOCKER_REGISTRY_SERVER=', parameters('dockerRegistryServer'), ' DOCKER_USER=', parameters('dockerRegistryUser'), ' DOCKER_PASSWORD=', parameters('dockerRegistryPassword'), ' DOCKER_EMAIL=', parameters('dockerRegistryEmail'), ' create-image-pull-secret; make DOCKER_IMAGE=', parameters('dockerImage'), ' XAP_GSC_COUNT=', parameters('xapGscCount'), ' XAP_LICENSE_KEY=', variables('xapLicenseKeyParam'), ' create-xap-datagrid\"')]"
             }
           },
           "type": "Microsoft.Compute/virtualMachines/extensions"

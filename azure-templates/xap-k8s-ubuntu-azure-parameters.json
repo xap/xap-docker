@@ -36,7 +36,7 @@
     "value": "xapuser"
   },
   "masterEndpointDNSNamePrefix": {
-    "value": "xapk8s-gigaspaces"
+    "value": "xapkubernetes-gigaspaces"
   },
   "masterSubnet": {
     "value": "10.240.0.0/16"
