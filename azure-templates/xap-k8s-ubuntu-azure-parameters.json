@@ -51,7 +51,7 @@
     "value": "Registered application key"
   },
   "sshRSAPublicKey": {
-    "value": "RSA public key"
+    "value": "GEN-SSH-PUB-KEY"
   },
   "agentSubnet": {
     "value": "10.240.0.0/16"
