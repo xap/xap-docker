@@ -41,7 +41,7 @@
            "fileUris": [
             "https://api.github.com/repos/xap/xap-docker/zipball"
            ],
-           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; start-compute-node.sh -n ', parameters('vmName'),' -lic ', parameters('xapLicense'), ' -l ', parameters('xapLookupLocators'), ' -gsc ', parameters('gscCount'), '\"')]"
+           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; /bin/bash start-compute-node.sh -n ', parameters('vmName'),' -lic ', parameters('xapLicense'), ' -l ', parameters('xapLookupLocators'), ' -gsc ', parameters('gscCount'), '\"')]"
         }
       }
     }

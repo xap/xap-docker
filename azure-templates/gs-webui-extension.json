@@ -41,7 +41,7 @@
            "fileUris": [
             "https://api.github.com/repos/xap/xap-docker/zipball"
            ],
-           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; start-gs-webui.sh -n ', parameters('vmName'),' -lic ', parameters('xapLicense'), ' -l ', parameters('xapLookupLocators'), '\"')]"
+           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; /bin/bash start-gs-webui.sh -n ', parameters('vmName'),' -lic ', parameters('xapLicense'), ' -l ', parameters('xapLookupLocators'), '\"')]"
         }
       }
     }

@@ -6,7 +6,8 @@
       "type": "string"
     },
     "xapLookupLocators": {
-      "type": "string"
+      "type": "string",
+      "defaultValue": ""
     },
     "xapLicense": {
       "type": "securestring"
@@ -40,7 +41,7 @@
            "fileUris": [
             "https://api.github.com/repos/xap/xap-docker/zipball"
            ],
-           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; start-mgt-node.sh -n ', parameters('vmName'),' -lic ', parameters('xapLicense'), ' -l ', concat(parameters('privateIP'), ':4174'), ' -gsc ', parameters('gscCount'), '\"')]"
+           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; /bin/bash start-mgt-node.sh -n ', parameters('vmName'),' -lic ', parameters('xapLicense'), ' -l ', concat(parameters('privateIP'), ':4174'), ' -gsc ', parameters('gscCount'), '\"')]"
         }
       }
     }
