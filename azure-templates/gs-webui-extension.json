@@ -5,17 +5,23 @@
     "vmName": {
       "type": "string"
     },
+    "xapLicense": {
+      "type": "securestring"
+    },
+    "xapLookupLocators": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "gscCount": {
+      "type": "int",
+      "defaultValue": 0
+    },
     "publicIP": {
       "type": "string"
     },
     "privateIP": {
-      "type": "string"
-    },
-    "xapLookupLocators": {
-      "type": "string"
-    },
-    "xapLicense": {
-      "type": "securestring"
+      "type": "string",
+      "defaultValue": ""
     }
   },
   "variables": {},
@@ -35,7 +41,7 @@
            "fileUris": [
             "https://api.github.com/repos/xap/xap-docker/zipball"
            ],
-           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; docker build -t gigaspaces/xap:12.0.1 .; docker run --name ', parameters('vmName'),' -d --net=host -e XAP_LICENSE_KEY=', parameters('xapLicense'), ' -e XAP_LOOKUP_LOCATORS=', parameters('xapLookupLocators'), ' gigaspaces/xap:12.0.1 ./bin/gs-webui.sh\"')]"
+           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; start-gs-webui.sh -n ', parameters('vmName'),' -lic ', parameters('xapLicense'), ' -l ', parameters('xapLookupLocators'), '\"')]"
         }
       }
     }

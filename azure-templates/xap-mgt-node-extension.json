@@ -5,17 +5,22 @@
     "vmName": {
       "type": "string"
     },
-    "publicIP": {
-      "type": "string"
-    },
-    "privateIP": {
-      "type": "string"
-    },
     "xapLookupLocators": {
       "type": "string"
     },
     "xapLicense": {
       "type": "securestring"
+    },
+    "gscCount": {
+      "type": "int",
+      "defaultValue": 0
+    },
+    "publicIP": {
+      "type": "string",
+      "defaultValue": ""
+    },
+    "privateIP": {
+      "type": "string"
     }
   },
   "variables": {},
@@ -35,7 +40,7 @@
            "fileUris": [
             "https://api.github.com/repos/xap/xap-docker/zipball"
            ],
-           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; docker build -t gigaspaces/xap:12.0.1 .; docker run --name ', parameters('vmName'),' -d --net=host -e XAP_LICENSE_KEY=', parameters('xapLicense'), ' -e XAP_LOOKUP_LOCATORS=', concat(parameters('privateIP'), ':4174'), ' gigaspaces/xap:12.0.1 gsa.global.lus 0 gsa.lus 1 gsa.global.gsm 0 gsa.gsm 1 gsa.gsc 0\"')]"
+           "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip; unzip -jo zipball; start-mgt-node.sh -n ', parameters('vmName'),' -lic ', parameters('xapLicense'), ' -l ', concat(parameters('privateIP'), ':4174'), ' -gsc ', parameters('gscCount'), '\"')]"
         }
       }
     }
