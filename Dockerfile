@@ -20,6 +20,7 @@ ENV XAP_GSC_OPTIONS "-Xms128m -Xmx128m"
 ENV XAP_LOOKUP_GROUPS xap
 
 # GS webui
+ENV XAP_WEBUI_OPTIONS "${EXT_JAVA_OPTIONS}"
 ENV WEBUI_PORT 8099
 
 COPY docker-entrypoint.sh /docker-entrypoint.sh
