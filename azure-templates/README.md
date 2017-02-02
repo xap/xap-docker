@@ -6,7 +6,7 @@ This directory contains [ARM templates](https://azure.microsoft.com/en-gb/resour
 
 You need to generate [Azure service principal](https://github.com/Azure/acs-engine/blob/master/docs/serviceprincipal.md) 
 
-### Deploying notes
+### Deployment notes
 
 You can deploy the following templates through [Azure Portal](https://portal.azure.com) or [Azure XPlat CLI 0.10.0](https://github.com/Azure/azure-xplat-cli/releases/tag/v0.10.0-May2016):
 
@@ -64,6 +64,11 @@ azure group create --name="<RESOURCE_GROUP_NAME>" --location="<LOCATION>"
 
 azure group deployment create --name="<DEPLOYMENT NAME>" --resource-group="<RESOURCE_GROUP_NAME>" --template-file="azure-templates/xap-k8s-ubuntu-azure.json" --parameters-file="azure-templates/xap-k8s-ubuntu-azure-parameters.json"
 ```
-    
+
+- You may want to install [kubectl](https://kubernetes.io/docs/user-guide/prereqs/) to your local machine. For the remote access you need to configure kubectl by copying `~/.kube/config` from Kubernetes master VM on Azure to your machine and set KUBECONFIG environment variable to point to the kubeconfig.
+- To access Kubernetes dashboard run `kubectl proxy` and navigate to `http://localhost:8001/ui` in your browser.
+- Gigaspaces Web Management console endpoint can be found in the Kubernetes dashboard under 'gs-webui' service or just run `kubectl get service gs-webui` to obtain it.
+
+
     
   

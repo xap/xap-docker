@@ -1,6 +1,10 @@
 ## xap-docker
 
-This repository contains **Dockerfile** of [GigaSpaces XAP](http://www.gigaspaces.com/xap-real-time-transaction-processing/overview)
+This repository contains:
+
+1. Dockerfile of [GigaSpaces XAP](http://www.gigaspaces.com/xap-real-time-transaction-processing/overview)
+2. [Azure templates](azure-templates/README.md) to run XAP on Azure
+3. [Kubernetes deployment configuration files](kubernetes-templates/README.md) to deploy XAP with Kubernetes
 
 ### Installation
 
