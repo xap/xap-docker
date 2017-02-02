@@ -51,7 +51,7 @@ azure group deployment create --name="<DEPLOYMENT NAME>" --resource-group="<RESO
 
 `xap-k8s-ubuntu-azure.json` template allows deploying an [Azure Container Service cluster with Kubernetes orchestrator](https://azure.microsoft.com/en-us/services/container-service/) and XAP deployments.
 
-- You will need to have an SSH RSA public key. You may follow instructions in acs-engine documentation (https://github.com/Azure/azure-quickstart-templates/blob/master/101-acs-dcos/docs/SSHKeyManagement.md#ssh-key-generation) in order to create a key pair.
+- You will need to have an SSH RSA public key. You may follow instructions in [acs-engine documentation](https://github.com/Azure/azure-quickstart-templates/blob/master/101-acs-dcos/docs/SSHKeyManagement.md#ssh-key-generation) in order to create a key pair.
 - You will need to build XAP docker image using the Dockerfile and push the image to some [private docker registry server](https://docs.docker.com/registry/deploying/). 
 
 In case you are using the Azure CLI:
