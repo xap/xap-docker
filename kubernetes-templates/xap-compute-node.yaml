@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - args:
-        - gsa.global.lus 0 gsa.lus 0 gsa.global.gsm 0 gsa.gsm 0 gsa.gsc 1
+        - gsa.global.lus 0 gsa.lus 0 gsa.global.gsm 0 gsa.gsm 0 gsa.gsc $(GSC_COUNT)
         env:
         - name: XAP_LOOKUP_LOCATORS
           value: xap-mgt-node:4174
@@ -28,6 +28,16 @@ spec:
             secretKeyRef:
               name: xap-license-secret
               key: xap-license
+        - name: GSC_COUNT
+          valueFrom:
+            configMapKeyRef:
+              name: xap-node-config-map
+              key: gsc-count
+        - name: XAP_GSC_OPTIONS
+          valueFrom:
+            configMapKeyRef:
+              name: xap-node-config-map
+              key: xap-gsc-options
         image: <image>
         imagePullPolicy: IfNotPresent
         name: xap-node
