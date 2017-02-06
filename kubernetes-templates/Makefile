@@ -11,6 +11,7 @@ XAP_LICENSE_KEY=<XAP LICENSE KEY>
 XAP_MGT_GSC_COUNT=0
 #XAP_MGT_GSM_OPTIONS="-Xms128m -Xmx128m"
 #XAP_MGT_GSC_OPTIONS="-Xms128m -Xmx128m -Dcom.gs.zones=zone1"
+#XAP_MGT_LUS_OPTIONS="-Xms128m -Xmx128m"
 
 XAP_NODE_REPLICA=4
 XAP_NODE_GSC_COUNT=1
@@ -23,8 +24,12 @@ create-xap-datagrid:
 	@echo -n "$(XAP_LICENSE_KEY)" > xap-license
 	@-kubectl create secret generic xap-license-secret --from-file=./xap-license
 	@echo 'Creating XAP configuration maps'
-	@-kubectl create configmap xap-mgt-config-map --from-literal=gsc-count=$(XAP_MGT_GSC_COUNT) --from-literal=xap-gsc-options=$(XAP_MGT_GSC_OPTIONS) --from-literal=xap-gsm-options=$(XAP_MGT_GSM_OPTIONS)
-	@-kubectl create configmap xap-node-config-map --from-literal=gsc-count=$(XAP_NODE_GSC_COUNT) --from-literal=xap-gsc-options=$(XAP_NODE_GSC_OPTIONS)
+	@echo -n "$(XAP_MGT_GSC_OPTIONS)" > xap-gsc-options
+	@echo -n "$(XAP_MGT_GSM_OPTIONS)" > xap-gsm-options
+	@echo -n "$(XAP_MGT_LUS_OPTIONS)" > xap-lus-options
+	@-kubectl create configmap xap-mgt-config-map --from-literal=gsc-count=$(XAP_MGT_GSC_COUNT) --from-file=./xap-gsc-options --from-file=./xap-gsm-options --from-file=./xap-lus-options
+	@echo -n "$(XAP_NODE_GSC_COUNT)" > xap-gsc-options
+	@-kubectl create configmap xap-node-config-map --from-literal=gsc-count=$(XAP_NODE_GSC_COUNT) --from-file=./xap-gsc-options
 	@echo 'Creating XAP GSM/LUS Service'
 	@kubectl create -f xap-mgt-node-svc.yaml
 	@echo 'Creating XAP GSM/LUS Deployment'

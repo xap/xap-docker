@@ -80,10 +80,16 @@
    "dockerRegistryEmail":{
       "value":"Email address"
    },
-   "xapGscCount":{
-      "value":2
-   },
    "xapLicenseKey":{
       "value":"XAP license key"
+   },
+   "xapMgtNodeGscCount":{
+      "value":1
+   },
+   "xapNodeCount":{
+      "value":2
+   },
+   "xapNodeGscCount":{
+      "value":1
    }
 }

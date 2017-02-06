@@ -452,7 +452,64 @@
          },
          "type": "string"
       },
-      "xapGscCount": {
+      "xapLicenseKey": {
+         "metadata": {
+            "description": "XAP license key."
+         },
+         "type": "securestring"
+      },
+      "xapMgtNodeGsmOptions": {
+         "metadata": {
+            "description": "GSM JVM parameters on XAP management node."
+         },
+         "defaultValue": "",
+         "type": "string"
+      },
+      "xapMgtNodeLusOptions": {
+         "metadata": {
+            "description": "LUS JVM parameters on XAP management node."
+         },
+         "defaultValue": "",
+         "type": "string"
+      },
+      "xapMgtNodeGscCount": {
+         "allowedValues": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+         ],
+         "defaultValue": 0,
+         "metadata": {
+            "description": "The count of GSC per one 'xap-node' pod."
+         },
+         "type": "int"
+      },
+      "xapMgtNodeGscOptions": {
+         "metadata": {
+            "description": "GSC JVM parameters on XAP management node."
+         },
+         "defaultValue": "",
+         "type": "string"
+      },
+      "xapNodeCount": {
          "allowedValues": [
             1,
             2,
@@ -560,11 +617,41 @@
          },
          "type": "int"
       },
-      "xapLicenseKey": {
+      "xapNodeGscCount": {
+         "allowedValues": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20
+         ],
+         "defaultValue": 1,
          "metadata": {
-            "description": "XAP license key."
+            "description": "The count of GSC per one 'xap-node' pod."
          },
-         "type": "securestring"
+         "type": "int"
+      },
+      "xapNodeGscOptions": {
+         "metadata": {
+            "description": "GSC JVM parameters on XAP compute node."
+         },
+         "defaultValue": "",
+         "type": "string"
       }
    },
    "variables": {
@@ -943,7 +1030,11 @@
       "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
       "vnetSubnetID": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
       "singleQuote": "'",
-      "xapLicenseKeyParam": "[concat(variables('singleQuote'), parameters('xapLicenseKey'), variables('singleQuote'))]"
+      "xapLicenseKeyParam": "[concat(variables('singleQuote'), parameters('xapLicenseKey'), variables('singleQuote'))]",
+      "xapMgtNodeGsmOptionsParam": "[concat(variables('singleQuote'), parameters('xapMgtNodeGsmOptions'), variables('singleQuote'))]",
+      "xapMgtNodeGscOptionsParam": "[concat(variables('singleQuote'), parameters('xapMgtNodeGscOptions'), variables('singleQuote'))]",
+      "xapMgtNodeLusOptionsParam": "[concat(variables('singleQuote'), parameters('xapMgtNodeLusOptions'), variables('singleQuote'))]",
+      "xapNodeGscOptionsParam": "[concat(variables('singleQuote'), parameters('xapNodeGscOptions'), variables('singleQuote'))]"
    },
    "resources": [
       {
@@ -1415,7 +1506,7 @@
                "fileUris": [
                   "https://api.github.com/repos/xap/xap-docker/zipball"
                ],
-               "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip make; unzip -jo zipball; make DOCKER_REGISTRY_SERVER=', parameters('dockerRegistryServer'), ' DOCKER_USER=', parameters('dockerRegistryUser'), ' DOCKER_PASSWORD=', parameters('dockerRegistryPassword'), ' DOCKER_EMAIL=', parameters('dockerRegistryEmail'), ' create-image-pull-secret; make DOCKER_IMAGE=', parameters('dockerImage'), ' XAP_NODE_REPLICA=', parameters('xapGscCount'), ' XAP_LICENSE_KEY=', variables('xapLicenseKeyParam'), ' create-xap-datagrid\"')]"
+               "commandToExecute": "[concat('sudo /bin/bash -c \"apt-get install unzip make; unzip -jo zipball; make DOCKER_REGISTRY_SERVER=', parameters('dockerRegistryServer'), ' DOCKER_USER=', parameters('dockerRegistryUser'), ' DOCKER_PASSWORD=', parameters('dockerRegistryPassword'), ' DOCKER_EMAIL=', parameters('dockerRegistryEmail'), ' create-image-pull-secret; make DOCKER_IMAGE=', parameters('dockerImage'), ' XAP_NODE_REPLICA=', parameters('xapNodeCount'), ' XAP_LICENSE_KEY=', variables('xapLicenseKeyParam'), ' XAP_MGT_GSC_COUNT=', parameters('xapMgtNodeGscCount'), ' XAP_MGT_GSM_OPTIONS=', variables('xapMgtNodeGsmOptionsParam'), ' XAP_MGT_GSC_OPTIONS=', variables('xapMgtNodeGscOptionsParam'), ' XAP_MGT_LUS_OPTIONS=', variables('xapMgtNodeLusOptionsParam'), ' XAP_NODE_GSC_COUNT=', parameters('xapNodeGscCount'), ' XAP_NODE_GSC_OPTIONS=', variables('xapNodeGscOptionsParam'), ' create-xap-datagrid\"')]"
             }
          },
          "type": "Microsoft.Compute/virtualMachines/extensions"

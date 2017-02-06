@@ -43,6 +43,11 @@ spec:
             configMapKeyRef:
               name: xap-mgt-config-map
               key: xap-gsc-options
+        - name: XAP_LUS_OPTIONS
+          valueFrom:
+            configMapKeyRef:
+              name: xap-mgt-config-map
+              key: xap-lus-options
         image: <image>
         imagePullPolicy: IfNotPresent
         name: xap-mgt-node
