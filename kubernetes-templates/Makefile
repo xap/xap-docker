@@ -28,7 +28,7 @@ create-xap-datagrid:
 	@echo -n "$(XAP_MGT_GSM_OPTIONS)" > xap-gsm-options
 	@echo -n "$(XAP_MGT_LUS_OPTIONS)" > xap-lus-options
 	@-kubectl create configmap xap-mgt-config-map --from-literal=gsc-count=$(XAP_MGT_GSC_COUNT) --from-file=./xap-gsc-options --from-file=./xap-gsm-options --from-file=./xap-lus-options
-	@echo -n "$(XAP_NODE_GSC_COUNT)" > xap-gsc-options
+	@echo -n "$(XAP_NODE_GSC_OPTIONS)" > xap-gsc-options
 	@-kubectl create configmap xap-node-config-map --from-literal=gsc-count=$(XAP_NODE_GSC_COUNT) --from-file=./xap-gsc-options
 	@echo 'Creating XAP GSM/LUS Service'
 	@kubectl create -f xap-mgt-node-svc.yaml
