@@ -10,4 +10,6 @@ if [[ "${first_param:0:1}" = '-' || "${first_param:0:3}" = 'gsa' ]]; then
 	set -- ./bin/gs-agent.sh "$@"
 fi
 
-exec env EXT_JAVA_OPTIONS="-Dcom.gs.licensekey=$XAP_LICENSE_KEY $EXT_JAVA_OPTIONS" XAP_WEBUI_OPTIONS="-Dcom.gs.licensekey=$XAP_LICENSE_KEY $XAP_WEBUI_OPTIONS" "$@"
+: ${XAP_LOOKUP_LOCATORS="$(hostname --ip-address):4174"}
+
+exec env EXT_JAVA_OPTIONS="-Dcom.gs.licensekey=$XAP_LICENSE_KEY $EXT_JAVA_OPTIONS" XAP_WEBUI_OPTIONS="-Dcom.gs.licensekey=$XAP_LICENSE_KEY $XAP_WEBUI_OPTIONS" XAP_LOOKUP_LOCATORS="$XAP_LOOKUP_LOCATORS" "$@"
